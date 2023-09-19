@@ -1,0 +1,17 @@
+def solution(triangle):
+    max_i = len(triangle)
+    dp = [[0 for _ in range(len(triangle[i]))] for i in range(max_i)]
+    dp[0][0] = triangle[0][0]
+
+    for i in range(0,max_i-1):
+        for j in range(i+1):
+            dp[i+1][j+1] = triangle[i+1][j+1] + dp[i][j]
+            tm = triangle[i+1][j] + dp[i][j]
+            if dp[i+1][j] < tm:
+                dp[i+1][j] = tm
+    for d in dp:
+        print(d)
+    return max(dp[max_i-1]) 
+
+tr = [[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]
+print(solution(tr))
